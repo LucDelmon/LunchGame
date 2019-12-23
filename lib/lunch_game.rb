@@ -1,0 +1,21 @@
+# frozen_string_literal: true
+
+require 'readline'
+require_relative 'errors'
+require_relative 'helpers'
+require_relative 'models/player'
+require_relative 'models/game'
+require_relative 'models/event_result'
+require_relative 'models/rooms/base_room'
+require_relative 'models/rooms/corridor_room'
+require_relative 'models/rooms/deadly_room'
+require_relative 'models/rooms/departure_room'
+require_relative 'models/rooms/interesting_room'
+require_relative 'models/rooms/neutral_room'
+require_relative 'models/rooms/final_room'
+require_relative 'services/game_service'
+require_relative 'services/change_room_service'
+require_relative 'services/lock_number_found_service'
+require_relative 'services/parser_service'
+require_relative 'services/room_initializer_service'
+
