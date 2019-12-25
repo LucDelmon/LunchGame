@@ -57,7 +57,7 @@ module LunchGame
 
       # @return [LunchGame::EventResult]
       def player_trying_to_access_boss
-        if !game.player_can_access_boss?
+        if game.player_can_access_boss?
           puts('You unlock the door and enter the final room')
           LunchGame::EventResult.new(type: :room_change, next_room_direction: :north)
         else

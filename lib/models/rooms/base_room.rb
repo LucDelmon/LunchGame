@@ -61,6 +61,24 @@ module LunchGame
         raise NotImplementedError
       end
 
+      # return the possible directions according to the rooms linked
+      # @return [Array<Symbol>]
+      def available_directions
+        if origin_direction.nil?
+          puts 'it seems that you got lost along the way, best things is to stop here'
+          raise ::LunchGame::Errors::ExitCommandReceived
+        end
+        possibles_directions = []
+        possibles_directions << :east if east_room
+        possibles_directions << :north if north_room
+        possibles_directions << :west if west_room
+        possibles_directions << :south if south_room
+        LunchGame::Helpers.relative_directions(
+          origin_direction: origin_direction,
+          directions: possibles_directions
+        )
+      end
+
       # List all the actions of a room including the directions
       # @return [Array<String>]
       def full_options_list
@@ -93,24 +111,6 @@ module LunchGame
           )
         end
         send(option)
-      end
-
-      # return the possible directions according to the rooms linked
-      # @return [Array<Symbol>]
-      def available_directions
-        if origin_direction.nil?
-          puts 'it seems that you got lost along the way, best things is to stop here'
-          raise ::LunchGame::Errors::ExitCommandReceived
-        end
-        possibles_directions = []
-        possibles_directions << :east if east_room
-        possibles_directions << :north if north_room
-        possibles_directions << :west if west_room
-        possibles_directions << :south if south_room
-        LunchGame::Helpers.relative_directions(
-          origin_direction: origin_direction,
-          directions: possibles_directions
-        )
       end
 
       # Room events

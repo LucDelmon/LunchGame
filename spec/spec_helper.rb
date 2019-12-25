@@ -1,4 +1,4 @@
-require "bundler/setup"
+require 'factory_bot'
 require_relative '../lib/lunch_game'
 
 RSpec.configure do |config|
@@ -11,4 +11,24 @@ RSpec.configure do |config|
   config.expect_with :rspec do |c|
     c.syntax = :expect
   end
+
+  original_stderr = $stderr
+  original_stdout = $stdout
+  config.before(:all) do
+    # Redirect stderr and stdout
+    $stderr = File.open(File::NULL, "w")
+    $stdout = File.open(File::NULL, "w")
+  end
+  config.after(:all) do
+    $stderr = original_stderr
+    $stdout = original_stdout
+  end
+
+  # Factory bot config
+  config.include FactoryBot::Syntax::Methods
+
+  config.before(:suite) do
+    FactoryBot.find_definitions
+  end
+
 end

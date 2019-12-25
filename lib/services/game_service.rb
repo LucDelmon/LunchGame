@@ -5,10 +5,10 @@ module LunchGame
   #
   # Run the game
   class GameService
-    attr_reader :game, :prompt_service
+    attr_reader :game, :parser_service
 
     def initialize
-      @prompt_service = LunchGame::ParserService.new
+      @parser_service = LunchGame::ParserService.new
     end
 
     # @return [void]]
@@ -28,7 +28,7 @@ module LunchGame
     # @param [LunchGame::Rooms::BaseRoom] current_room
     def execute_next_event(current_room)
       current_room.explain_room
-      next_move = prompt_service.call(allowed_inputs: current_room.full_options_list)
+      next_move = parser_service.call(allowed_inputs: current_room.full_options_list)
       event_result = current_room.play_options(next_move)
       compute_event_result_effects(event_result)
     end
@@ -53,7 +53,7 @@ module LunchGame
     # @return [String]
     def ask_player_name
       puts('Enter your name to start a game')
-      prompt_service.call
+      parser_service.call
     end
 
     # @param [String] player_name

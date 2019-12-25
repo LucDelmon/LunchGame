@@ -12,11 +12,15 @@ module LunchGame
 
     # @param type: [String]
     def initialize(type:, next_room_direction: nil)
+      unless ALLOWED_TYPES.include?(type)
+        raise ArgumentError, "Unrecognized type: #{@type} while creating an EventResult"
+      end
+      if type == :room_change && next_room_direction.nil?
+        raise ArgumentError, 'Missing argument next_room_direction when initialising EventResult of type :room_change'
+      end
+      
       @type = type
       @next_room_direction = next_room_direction
-      return if ALLOWED_TYPES.include?(@type)
-
-      raise ArgumentError, "Unrecognized type: #{@type} while creating an EventResult"
     end
   end
 end

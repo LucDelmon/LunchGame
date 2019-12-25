@@ -27,7 +27,7 @@ module LunchGame
 
       # @return [Array<Symbol>]
       def initial_room_options
-        %i[aim_for_the_head turn_around wait save_the_game]
+        %i[aim_for_the_head turn_around_arch wait save_the_game]
       end
 
       # @return [Array]
@@ -50,9 +50,9 @@ module LunchGame
       end
 
       # @return [LunchGame::EventResult]
-      def turn_around
-        puts 'you see a vulnerable point on the tail while turning around'
-        room_options_list.delete(:turn_around)
+      def turn_around_arch
+        puts 'you see a vulnerable point on the tail while turning around noot noot'
+        room_options_list.delete(:turn_around_arch)
         room_options_list << :aim_for_the_tail
         LunchGame::EventResult.new(type: :harmless_event)
       end
@@ -67,7 +67,7 @@ module LunchGame
       # @return [LunchGame::EventResult]
       def aim_for_the_tail
         puts('you aim for the tail and damage noot noot,'\
-        'in the resulting confusion you manage to defeat him and wins tons of loot')
+        ' in the resulting confusion you manage to defeat him and wins tons of loot')
         LunchGame::EventResult.new(type: :game_ended)
       end
     end
